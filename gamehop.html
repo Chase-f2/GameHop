@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameHop</title>
+
+  <!-- Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 60px #00e0ff88,
+        inset 0 0 15px #00aaffcc;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      max-width: 420px;
+      width: 100%;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border: 2px solid transparent;
+      animation: borderGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes borderGlow {
+      0% {
+        border-color: #00e0ff22;
+      }
+      100% {
+        border-color: #00aaffbb;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 0.6rem;
+      letter-spacing: 2px;
+      text-shadow:
+        0 0 10px #00e0ffaa,
+        0 0 20px #00aaffcc,
+        0 0 30px #00ccffdd;
+    }
+
+    p {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 3rem;
+      text-shadow: 0 0 8px #00bfff99;
+    }
+
+    button {
+      background: linear-gradient(135deg, #00e0ff, #0066ff);
+      border: none;
+      padding: 1rem 3.5rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow:
+        0 6px 15px rgba(0, 224, 255, 0.75),
+        0 0 10px #00ccffcc;
+      transition:
+        background 0.4s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+      user-select: none;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 4px #00bfffcc);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #0099ff, #004ecc);
+      box-shadow:
+        0 8px 25px rgba(0, 150, 255, 0.9),
+        0 0 18px #0077ffcc;
+      transform: scale(1.1) rotate(-1deg);
+    }
+
+    button:active {
+      background: linear-gradient(135deg, #005fcc, #003366);
+      box-shadow: none;
+      transform: scale(0.95) rotate(0deg);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+
+      button {
+        font-size: 1.1rem;
+        padding: 0.9rem 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 GameHop</h1>
+    <p>Click the button below to hop into a random online game!</p>
+    <button id="hopBtn">Hop to a Game</button>
+  </div>
+
+  <script>
+    const games = [
+      // Example set (replace with your full 100+ games list)
+      "https://slither.io",
+      "https://agar.io",
+      "https://krunker.io",
+      "https://diep.io",
+      "https://shellshock.io",
+      "https://mope.io",
+      "https://surviv.io",
+      "https://zombs.io",
+      "https://paper.io",
+      "https://hole.io",
+      "https://bonk.io",
+      "https://1v1.lol",
+      "https://smashkarts.io",
+      "https://skribbl.io",
+      "https://gartic.io",
+      "https://tetr.io",
+      "https://minesweeper.online",
+      "https://sudoku.com",
+      "https://chess.com/play",
+      "https://wordleplay.com",
+      // 25 Coolmath Games
+      "https://www.coolmathgames.com/0-bubble-trouble",
+      "https://www.coolmathgames.com/0-copperhead-2",
+      "https://www.coolmathgames.com/0-fireboy-and-watergirl-5",
+      "https://www.coolmathgames.com/0-castle-defense",
+      "https://www.coolmathgames.com/0-bloxorz-2",
+      "https://www.coolmathgames.com/0-kingdom-rush",
+      "https://www.coolmathgames.com/0-candy-crush-saga",
+      "https://www.coolmathgames.com/0-slope",
+      "https://www.coolmathgames.com/0-cubefield",
+      "https://www.coolmathgames.com/0-run-3",
+      "https://www.coolmathgames.com/0-money-movers",
+      "https://www.coolmathgames.com/0-moto-x3m",
+      "https://www.coolmathgames.com/0-tank-trouble",
+      "https://www.coolmathgames.com/0-arcade-basketball",
+      "https://www.coolmathgames.com/0-pacman",
+      "https://www.coolmathgames.com/0-minecraft-classic",
+      "https://www.coolmathgames.com/0-stupid-balls",
+      "https://www.coolmathgames.com/0-crazy-racing",
+      "https://www.coolmathgames.com/0-geometry-dash",
+      "https://www.coolmathgames.com/0-zombs-royale-io",
+      "https://www.coolmathgames.com/0-gravity-ghost",
+      "https://www.coolmathgames.com/0-super-stacker-2",
+      "https://www.coolmathgames.com/0-slope-run",
+      "https://www.coolmathgames.com/0-thrust",
+      "https://www.coolmathgames.com/0-crazy-motors",
+      // 25 CrazyGames
+      "https://www.crazygames.com/game/krunker-io",
+      "https://www.crazygames.com/game/1v1-lol",
+      "https://www.crazygames.com/game/stickman-hook",
+      "https://www.crazygames.com/game/moto-x3m",
+      "https://www.crazygames.com/game/basketball-stars",
+      "https://www.crazygames.com/game/roof-top-snipers",
+      "https://www.crazygames.com/game/slope",
+      "https://www.crazygames.com/game/rodeo-stampede",
+      "https://www.crazygames.com/game/temple-run-2",
+      "https://www.crazygames.com/game/moto-x3m-3",
+      "https://www.crazygames.com/game/fall-guys-io",
+      "https://www.crazygames.com/game/getaway-shootout",
+      "https://www.crazygames.com/game/bitlife-life-simulator",
+      "https://www.crazygames.com/game/drift-boss",
+      "https://www.crazygames.com/game/hole-io",
+      "https://www.crazygames.com/game/crossy-road",
+      "https://www.crazygames.com/game/merge-cannons",
+      "https://www.crazygames.com/game/paper-io-2",
+      "https://www.crazygames.com/game/brawl-io",
+      "https://www.crazygames.com/game/shadow-arts",
+      "https://www.crazygames.com/game/dead-zed",
+      "https://www.crazygames.com/game/crazy-motocross",
+      "https://www.crazygames.com/game/zombs-royale-io",
+      "https://www.crazygames.com/game/jetpack-joyride",
+      "https://www.crazygames.com/game/fireboy-and-watergirl-forest-temple"
+    ];
+
+    function goToRandomGame() {
+      const randomIndex = Math.floor(Math.random() * games.length);
+      const randomGame = games[randomIndex];
+      window.location.href = randomGame;
+    }
+
+    document.getElementById('hopBtn').addEventListener('click', goToRandomGame);
+  </script>
+</body>
+</html>
